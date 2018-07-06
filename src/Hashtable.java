@@ -8,9 +8,11 @@ import java.util.List;
 public class Hashtable {
 
     private List<String>[] hashtable;
+    private final int size;
 
-    public Hashtable() {
-        hashtable = new List[5003];
+    public Hashtable(int size) {
+        this.size = size;
+        hashtable = new List[size];
     }
 
     public void readFile(String file) {
@@ -47,7 +49,7 @@ public class Hashtable {
             hashvalue += Math.pow(characterValue, i);
         }
 
-        return (int) (hashvalue % 5000);
+        return (int) (hashvalue % size);
     }
 
     public List<String>[] getHashtable() {
@@ -86,7 +88,7 @@ public class Hashtable {
     }
 
     public static void main(String[] args) {
-        Hashtable hashtable = new Hashtable();
+        Hashtable hashtable = new Hashtable(5000);
         hashtable.readFile("words.txt");
 
         hashtable.printHastable();
