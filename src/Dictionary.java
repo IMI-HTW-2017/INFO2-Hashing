@@ -55,7 +55,7 @@ public class Dictionary {
 
     private int calculateHashValue(String word) {
         long hashvalue = 0;
-        char[] chars = word.toCharArray();
+        char[] chars = word.toLowerCase().toCharArray();
         Arrays.sort(chars);
 
         for (int i = 0; i < chars.length; i++) {
