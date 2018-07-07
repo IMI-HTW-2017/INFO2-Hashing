@@ -45,8 +45,8 @@ public class Dictionary {
         Arrays.sort(chars);
 
         for (int i = 0; i < chars.length; i++) {
-            int characterValue = (int) chars[i] - 96;
-            hashvalue += Math.pow(characterValue, i);
+            int characterValue = (int) chars[i] - 97;
+            hashvalue += Math.pow(2, characterValue);
         }
 
         return (int) (hashvalue % size);
@@ -88,7 +88,7 @@ public class Dictionary {
     }
 
     public static void main(String[] args) {
-        Dictionary hashtable = new Dictionary(5000);
+        Dictionary hashtable = new Dictionary(3947);
         hashtable.readFile("words.txt");
 
         hashtable.printHastable();
