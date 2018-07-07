@@ -10,9 +10,19 @@ public class Dictionary {
     private List<String>[] hashtable;
     private final int size;
 
+    private int numOfElements;
+    private int numOfCollisions;
+    private int maxChainLength;
+    private int numOfEmptyCells;
+
     public Dictionary(int size) {
         this.size = size;
         hashtable = new List[size];
+
+        numOfElements = 0;
+        numOfCollisions = 0;
+        maxChainLength = 0;
+        numOfEmptyCells = 0;
     }
 
     public void readFile(String file) {
@@ -26,17 +36,21 @@ public class Dictionary {
                     continue;
                 }
 
+                numOfElements++;
+
                 int index = calculateHashValue(word);
 
                 if (hashtable[index] == null) {
                     hashtable[index] = new ArrayList<>();
+                } else {
+                    numOfCollisions++;
                 }
+
                 hashtable[index].add(word);
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     private int calculateHashValue(String word) {
@@ -56,6 +70,15 @@ public class Dictionary {
         return hashtable;
     }
 
+    public void calculateStats() {
+        for (List<String> list : hashtable) {
+            if (list == null)
+                numOfEmptyCells++;
+            else if (list.size() > maxChainLength)
+                maxChainLength = list.size();
+        }
+    }
+
     public void printHastable() {
         for (int i = 0; i < getHashtable().length; i++) {
             List<String> list = getHashtable()[i];
@@ -69,6 +92,12 @@ public class Dictionary {
             }
             System.out.println(i + ": " + sb);
         }
+
+        calculateStats();
+        System.out.println("\nElements: " + numOfElements);
+        System.out.println("Collisions: " + numOfCollisions);
+        System.out.println("Max Chain Length: " + maxChainLength);
+        System.out.println("Empty Cells: " + numOfEmptyCells + "\n");
     }
 
     public void checkWord(String word) {
