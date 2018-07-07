@@ -5,12 +5,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Hashtable {
+public class Dictionary {
 
     private List<String>[] hashtable;
     private final int size;
 
-    public Hashtable(int size) {
+    public Dictionary(int size) {
         this.size = size;
         hashtable = new List[size];
     }
@@ -88,7 +88,7 @@ public class Hashtable {
     }
 
     public static void main(String[] args) {
-        Hashtable hashtable = new Hashtable(5000);
+        Dictionary hashtable = new Dictionary(5000);
         hashtable.readFile("words.txt");
 
         hashtable.printHastable();
