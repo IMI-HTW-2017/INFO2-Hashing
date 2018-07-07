@@ -66,10 +66,6 @@ public class Dictionary {
         return (int) (hashvalue % size);
     }
 
-    public List<String>[] getHashtable() {
-        return hashtable;
-    }
-
     public void calculateStats() {
         for (List<String> list : hashtable) {
             if (list == null)
@@ -80,8 +76,8 @@ public class Dictionary {
     }
 
     public void printHastable() {
-        for (int i = 0; i < getHashtable().length; i++) {
-            List<String> list = getHashtable()[i];
+        for (int i = 0; i < hashtable.length; i++) {
+            List<String> list = hashtable[i];
 
             StringBuilder sb = new StringBuilder();
 
@@ -101,7 +97,7 @@ public class Dictionary {
     }
 
     public void checkWord(String word) {
-        List<String> list = getHashtable()[calculateHashValue(word)];
+        List<String> list = hashtable[calculateHashValue(word)];
 
         char[] chars = word.toCharArray();
         Arrays.sort(chars);
@@ -117,12 +113,12 @@ public class Dictionary {
     }
 
     public static void main(String[] args) {
-        Dictionary hashtable = new Dictionary(3947);
-        hashtable.readFile("words.txt");
+        Dictionary dictionary = new Dictionary(3947);
+        dictionary.readFile("words.txt");
 
-        hashtable.printHastable();
+        dictionary.printHastable();
 
-        hashtable.checkWord("aaghhrr");
+        dictionary.checkWord("aaghhrr");
     }
 
 }
